@@ -1,0 +1,1047 @@
+:root {
+  --primary: #34c759;
+  --secondary: #2e7d32;
+  --dark: #1a3c34;
+  --darker: #0a1f1b;
+  --light: #f8fafc;
+  --pending: #ef5350;
+  --active: #2e7d32;
+  --completed: #a5d6a7;
+  --textbased: #e2e8f0;
+  --bg: #e2e8f0;
+  --side: #1e293b;
+  --bgside: #1a3c34;
+  --green1: #1b5e20;
+  --green2: #388e3c;
+  --yellow: #ead200;
+  --rejected: #d32f2f;
+  --approved: #2e7d32;
+  --failed: #f4511e;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--green1);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--green2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.2);
+}
+
+
+
+.nav-container {
+  position: relative;
+}
+
+.burger {
+  display: none;
+  cursor: pointer;
+  width: 30px;
+  height: 20px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  z-index: 1200;
+}
+
+.burger span {
+  background-color: #f5dc00ff;
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.burger span:nth-child(1) {
+  top: 0;
+}
+
+.burger span:nth-child(2) {
+  top: 8px;
+}
+
+.burger span:nth-child(3) {
+  top: 16px;
+}
+
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 8px;
+  background-color: var(--yellow);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 8px;
+  background-color: var(--yellow);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+nav a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(234, 210, 0, 0.8), rgba(0, 0, 0, 0));
+  transition: width 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: -1;
+}
+
+nav a:hover::before,
+nav a.active::before {
+  width: 100%;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--light);
+  background: linear-gradient(90deg, rgba(234, 210, 0, 0.8), rgba(0, 0, 0, 0));
+}
+
+h3 {
+  font-size: 18px;
+  color: var(--darker);
+  margin-bottom: 16px;
+}
+
+.message {
+  padding: 12px 16px;
+  margin: 16px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow);
+  animation: slideIn 0.3s ease;
+}
+
+.message.success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.message.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.message i {
+  margin-right: 8px;
+}
+
+
+.status_overview .display {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.status-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.status-box {
+  flex: 1;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.status-box.active-box {
+  background: url("https://cycloan-cldd.com/IMAGE/bg active card.jpg") no-repeat center center/cover;
+  color: var(--darker);
+}
+
+.status-box.pending-box {
+  background: url("https://cycloan-cldd.com/IMAGE/bg pending card.jpg") no-repeat center center/cover;
+  color: var(--darker);
+}
+
+.status-box.closed-box {
+  background: url("https://cycloan-cldd.com/IMAGE/bg closed card.jpg") no-repeat center center/cover;
+  color: var(--darker);
+}
+
+.status-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.status-count {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--darker);
+  margin: 10px 0;
+}
+
+.status-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--darker);
+}
+
+.no-data-image {
+    text-align: center;
+    color: #666;
+    opacity: 0.9;
+}
+
+.no-data-image img {
+    width: 220px;
+    max-width: 90%;
+    opacity: 0.85;
+    transition: transform 0.3s ease;
+}
+
+.no-data-image img:hover {
+    transform: scale(1.05);
+}
+
+.no-data-image p {
+    margin-top: 8px;
+    font-size: 0.95em;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.graph-section {
+  margin-top: 20px;
+}
+
+.graph-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.graph-box {
+  flex: 1;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.graph-box h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+  color: var(--darker);
+}
+
+.scrollable-table {
+  max-height: 400px;
+  overflow-y: auto;
+  display: block;
+  box-shadow: var(--shadow);
+}
+
+.loan-table,
+.due-accounts-table,
+.activity-logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.loan-table th,
+.due-accounts-table th,
+.activity-logs-table th,
+.loan-table td,
+.due-accounts-table td,
+.activity-logs-table td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.loan-table th,
+.due-accounts-table th,
+.activity-logs-table th {
+  background: var(--green1);
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.loan-table tr,
+.due-accounts-table tr,
+.activity-logs-table tr {
+  transition: background 0.2s;
+}
+
+.loan-table tr:hover,
+.due-accounts-table tr:hover,
+.activity-logs-table tr:hover {
+  background: #f1f5f9;
+}
+
+.loan-table td[data-label]::before,
+.due-accounts-table td[data-label]::before,
+.activity-logs-table td[data-label]::before {
+  content: attr(data-label);
+  display: none;
+  font-weight: 500;
+  color: var(--darker);
+}
+
+.activity-logs-container {
+  max-height: 300px;
+  overflow-y: auto;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
+
+.activity-logs-table th:nth-child(1),
+.activity-logs-table td:nth-child(1) {
+  width: 20%;
+}
+.activity-logs-table th:nth-child(2),
+.activity-logs-table td:nth-child(2) {
+  width: 15%;
+}
+.activity-logs-table th:nth-child(3),
+.activity-logs-table td:nth-child(3) {
+  width: 10%;
+}
+.activity-logs-table th:nth-child(4),
+.activity-logs-table td:nth-child(4) {
+  width: 10%;
+}
+.activity-logs-table th:nth-child(5),
+.activity-logs-table td:nth-child(5) {
+  width: 15%;
+}
+.activity-logs-table th:nth-child(6),
+.activity-logs-table td:nth-child(6) {
+  width: 25%;
+}
+.activity-logs-table th:nth-child(7),
+.activity-logs-table td:nth-child(7) {
+  width: 5%;
+}
+
+.activity-logs-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-badge.status-pending {
+  background: #fef3c7;
+  color: var(--pending);
+}
+
+.status-badge.status-new {
+  background: #fef3c7;
+  color: var(--pending);
+}
+
+.status-badge.status-approved {
+  background: #d1fae5;
+  color: var(--approved);
+}
+
+.status-badge.status-rejected {
+  background: #fee2e2;
+  color: var(--rejected);
+}
+
+.status-badge.status-completed {
+  background: #d1fae5;
+  color: var(--completed);
+}
+
+.status-badge.status-failed {
+  background: #fee2e2;
+  color: var(--failed);
+}
+
+.badge-pending {
+  background: #fef3c7;
+  color: var(--pending);
+}
+
+.badge-approved {
+  background: #d1fae5;
+  color: var(--approved);
+}
+
+.badge-rejected {
+  background: #fee2e2;
+  color: var(--rejected);
+}
+
+.status-warning {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.actions-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.actions-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.view-btn,
+.calculate-btn {
+  background: var(--yellow);
+  color: #fff;
+}
+
+.view-btn:hover,
+.calculate-btn:hover {
+  background: #d4bd00;
+  box-shadow: 0 0 10px rgba(234, 210, 0, 0.7), 0 0 20px rgba(234, 210, 0, 0.4);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-header {
+    color: var(--light);
+    padding: 15px 2px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  padding: 24px;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-content h2 {
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: var(--yellow);
+    color: #fff;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.loan-details h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: var(--darker);
+}
+
+.loan-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.loan-details .error {
+  color: #f44336;
+}
+
+.loan-details .error i {
+  margin-right: 5px;
+}
+
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.details-grid p {
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.details-grid p strong {
+  color: var(--darker);
+}
+
+.details-grid p:hover {
+  background-color: #e6e6e6;
+}
+
+.financial-subsection {
+    border: none;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.financial-subsection h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--darker);
+}
+
+.loan-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9fafb;
+}
+
+.loan-info h3 {
+  color: var(--darker);
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e5e7eb;
+  font-size: 18px;
+}
+
+.documents-list {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9fafb;
+}
+
+.documents-list h3 {
+    color: var(--darker);
+    margin: 0 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e5e7eb;
+    font-size: 16px;
+}
+
+.documents-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.documents-list li {
+    margin: 8px 0;
+}
+
+.documents-list a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.remarks-list {
+    border: none;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    margin-top: 32px;
+}
+
+.remarks-list h3 {
+    font-size: 1.25rem;
+    color: var(--dark);
+    margin-bottom: 16px;
+    margin-top: 0;
+}
+
+.remarks-list p {
+    font-style: italic;
+    color: var(--textbased);
+}
+
+.remarks-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.remarks-list li {
+  margin: 12px 0;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--textbased);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.remarks-list li span {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.interest-rate-card {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.interest-rate-history table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.interest-rate-history th {
+  background: var(--green1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.interest-rate-history tr:last-child td {
+  border-bottom: none;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--darker);
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--green1);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  outline: none;
+}
+
+.form-group select {
+  margin-left: 10px;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 16px;
+  color: var(--darker);
+}
+
+.spinner {
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid var(--green1);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    margin-top: 80px;
+    padding: 20px;
+  }
+
+  .status-container {
+    flex-direction: column;
+  }
+
+  .graph-container {
+    flex-direction: column;
+  }
+
+  .graph-box {
+    margin: 10px 0;
+  }
+
+  .loan-table,
+  .due-accounts-table,
+  .activity-logs-table,
+  .interest-rate-history table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .loan-table thead,
+  .due-accounts-table thead,
+  .activity-logs-table thead,
+  .interest-rate-history thead {
+    display: none;
+  }
+
+  .loan-table tbody,
+  .due-accounts-table tbody,
+  .activity-logs-table tbody,
+  .interest-rate-history tbody,
+  .loan-table tr,
+  .due-accounts-table tr,
+  .activity-logs-table tr,
+  .interest-rate-history tr {
+    display: block;
+  }
+
+  .loan-table td,
+  .due-accounts-table td,
+  .activity-logs-table td,
+  .interest-rate-history td {
+    display: block;
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+    font-size: 13px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .loan-table td:before,
+  .due-accounts-table td:before,
+  .activity-logs-table td:before,
+  .interest-rate-history td:before {
+    display: block;
+    position: absolute;
+    left: 16px;
+    top: 12px;
+    content: attr(data-label);
+    font-weight: 500;
+    color: var(--darker);
+    text-align: left;
+    width: 45%;
+    padding-right: 10px;
+  }
+
+  .loan-table td:last-child,
+  .due-accounts-table td:last-child,
+  .activity-logs-table td:last-child,
+  .interest-rate-history td:last-child {
+    border-bottom: none;
+  }
+
+  .activity-logs-container {
+    max-height: 200px;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .modal-header h2 {
+    font-size: 20px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 13px;
+  }
+
+  .actions-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 450px) and (max-height: 950px) {
+  .burger {
+    display: block;
+  }
+
+  nav {
+    transform: translateX(-100%);
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+  }
+
+  nav.active {
+    transform: translateX(0);
+  }
+
+  .header {
+    left: 0;
+    width: 100%;
+  }
+
+  .main-content {
+    margin-left: 0;
+    margin-top: 80px;
+    padding: 16px;
+  }
+
+  .message {
+    display: none;
+  }
+
+  #datetime .time {
+    display: none;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .status-box {
+    padding: 15px;
+  }
+
+  .status-icon {
+    font-size: 1.5rem;
+  }
+
+  .status-count {
+    font-size: 2rem;
+  }
+
+  .status-label {
+    font-size: 1rem;
+  }
+
+  .graph-box canvas {
+    height: 150px !important;
+  }
+
+  .loan-table td,
+  .due-accounts-table td,
+  .activity-logs-table td,
+  .interest-rate-history td {
+    font-size: 12px;
+    padding: 10px 15px 10px 50%;
+  }
+
+  .actions-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .modal-header h2 {
+    font-size: 20px;
+  }
+
+  .modal-body {
+    font-size: 12px;
+  }
+
+  .modal-body p,
+  .loan-details p,
+  .result {
+    font-size: 12px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .no-applicants,
+  .no-due-accounts,
+  .no-activity-logs {
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  .scrollable-table {
+    max-height: 300px;
+  }
+
+  .activity-logs-container {
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 600px) {
+  .interest-rate-history th,
+  .interest-rate-history td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 13px;
+  }
+
+  .actions-btn.calculate-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

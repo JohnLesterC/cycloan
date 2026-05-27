@@ -1,0 +1,1230 @@
+:root {
+  --primary: #1b5e20;
+  --secondary: #2e7d32;
+  --dark: #1a3c34;
+  --darker: #0a1f1b;
+  --light: #f8fafc;
+  --pending: #ef5350;
+  --active: #1b5e20;
+  --completed: #2e7d32;
+  --textbased: #161718;
+  --bg: #e2e8f0;
+  --side: #1e293b;
+  --bgside: #1a3c34;
+  --green1: #1b5e20;
+  --green2: #2e7d32;
+  --yellow: #fbc02d;
+  --rejected: #d32f2f;
+  --approved: #1b5e20;
+  --failed: #f4511e;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #edeff3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-container {
+  position: relative;
+}
+
+.burger {
+  display: none;
+  cursor: pointer;
+  width: 30px;
+  height: 20px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  z-index: 1200;
+}
+
+.burger span {
+  background-color: #f5dc00ff;
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.burger span:nth-child(1) {
+  top: 0;
+}
+
+.burger span:nth-child(2) {
+  top: 8px;
+}
+
+.burger span:nth-child(3) {
+  top: 16px;
+}
+
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 8px;
+  background-color: var(--yellow);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 8px;
+  background-color: var(--yellow);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: var(--completed);
+  background-image: url("../IMAGE/db-bg.com.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1100;
+  transition: transform 0.3s ease;
+}
+
+nav .sidebar-logo {
+  width: 100%;
+  max-width: 180px;
+  margin: 20px auto 40px;
+  display: block;
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.8));
+}
+
+nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 10px;
+  text-decoration: none;
+  color: white;
+  border-radius: 8px;
+  transition: color 0.3s ease;
+  z-index: 1;
+}
+
+nav a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(251, 192, 45, 0.8), rgba(0, 0, 0, 0));
+  transition: width 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: -1;
+}
+
+nav a:hover::before,
+nav a.active::before {
+  width: 100%;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--light);
+  background: linear-gradient(90deg, rgba(251, 192, 45, 0.8), rgba(0, 0, 0, 0));
+}
+
+nav a i {
+  margin-right: 12px;
+}
+
+/* Main Content - Modern Layout */
+.main-content {
+  margin-top: 70px;
+  margin-left: 260px;
+  padding: 30px;
+  min-height: calc(100vh - 70px);
+  transition: margin-left 0.3s ease;
+}
+
+/* Page Header */
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+h2::before {
+  content: "";
+  width: 5px;
+  height: 32px;
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  border-radius: 3px;
+}
+
+.page-subtitle {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 28px;
+  margin-left: 17px;
+}
+
+/* Enhanced Table Styling */
+.loan-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  font-family: "Poppins", sans-serif;
+}
+
+.loan-table th,
+.loan-table td {
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.loan-table thead {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.loan-table th {
+  color: #475569;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  position: relative;
+}
+
+.loan-table th::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.loan-table th:hover::after {
+  transform: scaleX(1);
+}
+
+.loan-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.loan-table tbody tr:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #f0fdf4 100%);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(27, 94, 32, 0.08);
+}
+
+.loan-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.loan-table td {
+  color: #475569;
+  font-weight: 500;
+}
+
+.loan-table td[data-label="Applicant Name"] {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.loan-table td[data-label="Final Amount"] {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.loan-table td[data-label]::before {
+  content: attr(data-label);
+  display: none;
+  font-weight: 500;
+  color: var(--textbased);
+}
+
+/* Enhanced Action Buttons */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  margin: 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.action-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.view-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.view-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.view-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.view-btn:hover {
+  box-shadow: 0 6px 20px rgba(27, 94, 32, 0.3);
+}
+
+/* Enhanced Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.status-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.status-badge.active {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+}
+
+.status-badge.active::before {
+  background: #3b82f6;
+}
+
+.status-badge.partial {
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #4338ca;
+  border: 1px solid #a5b4fc;
+}
+
+.status-badge.partial::before {
+  background: #6366f1;
+}
+
+.status-badge.paid {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.status-badge.paid::before {
+  background: #22c55e;
+}
+
+/* Enhanced No Applications Message */
+.no-applications {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.no-applications i {
+  font-size: 64px;
+  color: #cbd5e1;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.no-applications .message-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.no-applications .message-text {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ===========================
+   Loan Banners Styling
+   =========================== */
+
+.loans-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.active-loan-banner {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(27, 94, 32, 0.1);
+  transition: all 0.3s ease;
+}
+
+.active-loan-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.banner-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--bg);
+}
+
+.banner-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+  box-shadow: 0 4px 12px rgba(27, 94, 32, 0.3);
+  flex-shrink: 0;
+}
+
+.banner-info {
+  flex: 1;
+}
+
+.banner-info h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 6px 0;
+}
+
+.banner-info h3::before {
+  display: none;
+}
+
+.banner-info p {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.banner-status {
+  margin-left: auto;
+}
+
+.badge-paid {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.badge-partial {
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #4f46e5;
+  border: 1px solid #a5b4fc;
+}
+
+.badge-active {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+}
+
+/* Loan Metrics Grid */
+.loan-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.metric-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.metric-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--dark);
+  word-wrap: break-word;
+}
+
+.metric-value.success {
+  color: #000000;
+  font-weight: 800;
+  background: none;
+}
+
+.metric-value.warning {
+  color: #f59e0b;
+}
+
+.metric-value.pending {
+  color: #f59e0b;
+  font-size: 1.2rem;
+}
+
+/* Payment Progress Bar */
+.payment-progress {
+  margin-bottom: 24px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.progress-percent {
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.progress-bar-container {
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 12px;
+  transition: width 0.6s ease;
+  box-shadow: 0 2px 8px rgba(27, 94, 32, 0.3);
+}
+
+/* Banner Actions */
+.banner-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.action-btn.secondary {
+  background: white;
+  color: var(--dark);
+  border: 2px solid var(--bg);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.action-btn.secondary:hover {
+  background: var(--bg);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   End Loan Banners Styling
+   =========================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 0;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: scale(0.9);
+  opacity: 0;
+  overflow: hidden;
+}
+
+.modal.show .modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 24px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: none;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-header h2::before {
+  display: none;
+}
+
+.modal-header h2 i {
+  font-size: 24px;
+}
+
+.close {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s ease;
+  position: static;
+}
+
+.close:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.modal-body {
+  padding: 28px;
+  max-height: calc(85vh - 80px);
+  overflow-y: auto;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.loan-details {
+  margin-top: 0;
+}
+
+/* Modal Table Styling */
+.modal-body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+  font-size: 14px;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.modal-body table thead {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.modal-body table th {
+  background: transparent;
+  color: #475569;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-align: left;
+}
+
+.modal-body table td {
+  padding: 14px 16px;
+  border-top: 1px solid #f1f5f9;
+  color: #475569;
+  font-weight: 500;
+}
+
+.modal-body table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.modal-body table tbody tr:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #f0fdf4 100%);
+}
+
+.modal-body table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.modal-body table tr:nth-child(even):hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #f0fdf4 100%);
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    margin-top: 80px;
+    padding: 20px;
+  }
+
+  /* Loan Banners Responsive */
+  .active-loan-banner {
+    padding: 20px;
+  }
+
+  .banner-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .banner-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+
+  .banner-info h3 {
+    font-size: 1.3rem;
+  }
+
+  .banner-status {
+    margin-left: 0;
+    align-self: flex-start;
+  }
+
+  .loan-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .metric-card {
+    padding: 16px;
+  }
+
+  .metric-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .metric-value {
+    font-size: 1.4rem;
+  }
+
+  .banner-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Legacy Table Styles */
+  .loan-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .loan-table thead {
+    display: none;
+  }
+
+  .loan-table tbody,
+  .loan-table tr {
+    display: block;
+  }
+
+  .loan-table td {
+    display: block;
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+    font-size: 13px;
+  }
+
+  .loan-table td:before {
+    display: block;
+    position: absolute;
+    left: 15px;
+    top: 12px;
+    content: attr(data-label);
+    font-weight: 500;
+    color: var(--textbased);
+  }
+
+  .modal-content {
+    width: 95%;
+    max-width: 95%;
+    margin: 10% auto;
+  }
+
+  .modal-header {
+    padding: 15px 20px;
+  }
+
+  .modal-body {
+    padding: 20px;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .modal-content h2 {
+    font-size: 22px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  nav {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 10px;
+  }
+
+  nav .sidebar-logo {
+    max-width: 120px;
+    margin: 0 auto 10px;
+  }
+
+  nav a {
+    font-size: 14px;
+    padding: 8px 10px;
+    margin-bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 450px) and (max-height: 950px) {
+  .burger {
+    display: block;
+  }
+
+  nav {
+    transform: translateX(-100%);
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+  }
+
+  nav.active,
+  nav.open {
+    transform: translateX(0);
+  }
+
+  .nav-container.expanded {
+    z-index: 9999;
+  }
+
+  .header {
+    left: 0;
+    width: 100%;
+  }
+
+  .main-content {
+    margin-left: 0;
+    margin-top: 80px;
+    padding: 16px;
+  }
+
+  .message {
+    display: none;
+  }
+
+  #datetime .time {
+    display: none;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .loan-table td {
+    font-size: 12px;
+    padding: 10px 15px 10px 50%;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .modal-body table {
+    font-size: 12px;
+  }
+
+  .modal-body table th,
+  .modal-body table td {
+    padding: 10px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .calculate-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .no-applications {
+    font-size: 14px;
+    padding: 15px;
+  }
+}
+
+/* Payment Schedule Section */
+.payment-schedule-section {
+  margin-top: 24px;
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.payment-schedule-section h3 {
+  color: var(--dark);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.payment-schedule-section h3 i {
+  color: var(--primary);
+}
+
+/* Payment Schedule Notice (when no schedule exists) */
+.payment-schedule-notice {
+  margin-top: 24px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #fbbf24;
+}
+
+.notice-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.8rem;
+}
+
+.notice-content h4 {
+  margin: 0 0 8px 0;
+  color: var(--dark);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.notice-content p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.scrollable-table {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.payment-schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: 0.95rem;
+}
+
+.payment-schedule-table thead {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+}
+
+.payment-schedule-table thead th {
+  padding: 14px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.payment-schedule-table tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.2s ease;
+}
+
+.payment-schedule-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.payment-schedule-table tbody td {
+  padding: 12px;
+  color: var(--dark);
+}
+
+.payment-schedule-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Status badges in payment schedule - using standard badge styling */
+.payment-schedule-table .status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Responsive Payment Schedule */
+@media (max-width: 1024px) {
+  .payment-schedule-table {
+    font-size: 0.85rem;
+  }
+
+  .payment-schedule-table thead th,
+  .payment-schedule-table tbody td {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-schedule-section {
+    padding: 16px;
+  }
+
+  .payment-schedule-table {
+    font-size: 0.8rem;
+  }
+
+  .payment-schedule-table thead th,
+  .payment-schedule-table tbody td {
+    padding: 8px 6px;
+  }
+
+  .payment-schedule-table .status-badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+}

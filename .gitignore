@@ -1,0 +1,54 @@
+# Local environment variables
+.env
+.env.local
+.env.*.local
+
+# XAMPP/Local development
+*.log
+*.txt
+*.swp
+*.swo
+*~
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Database backups and temporary files
+*.sql.bak
+temp/
+tmp/
+cache/
+
+# Uploaded files (keep structure but ignore files)
+uploads/
+uploads/*
+!uploads/.gitkeep
+
+# OS files
+Thumbs.db
+.AppleDouble
+
+# Node dependencies (if used)
+node_modules/
+package-lock.json
+
+# Composer (if used)
+vendor/
+composer.lock
+
+# Sensitive configuration files
+CYCLOAN_db.php.local
+config.local.php
+
+# Session and temporary files
+*.sess
+session_files/
+
+# Archives
+*.zip
+*.tar.gz
+*.rar

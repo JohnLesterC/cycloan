@@ -1,0 +1,8 @@
+nav a.active {
+  background: linear-gradient(90deg, rgba(251, 192, 45, 0.8), rgba(0, 0, 0, 0));
+  color: var(--light);
+}
+
+nav a.active::before {
+  width: 100%;
+}

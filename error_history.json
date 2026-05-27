@@ -1,0 +1,249 @@
+[
+    {
+        "timestamp": "2025-10-27 09:16:14",
+        "stats": {
+            "total_files": 773,
+            "php_files": 659,
+            "js_files": 46,
+            "css_files": 68,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 15,
+            "code_quality_issues": 27,
+            "deprecated_functions": 5,
+            "sql_injections": 4,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 18,
+        "scan_duration": "3,507.11"
+    },
+    {
+        "timestamp": "2025-10-27 09:17:01",
+        "stats": {
+            "total_files": 773,
+            "php_files": 659,
+            "js_files": 46,
+            "css_files": 68,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 15,
+            "code_quality_issues": 27,
+            "deprecated_functions": 5,
+            "sql_injections": 4,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 18,
+        "scan_duration": "3,618.71"
+    },
+    {
+        "timestamp": "2025-10-27 09:28:18",
+        "stats": {
+            "total_files": 773,
+            "php_files": 659,
+            "js_files": 46,
+            "css_files": 68,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 47,
+            "code_quality_issues": 27,
+            "deprecated_functions": 0,
+            "sql_injections": 9,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 30,
+        "scan_duration": "3,750.52"
+    },
+    {
+        "timestamp": "2025-10-27 16:26:47",
+        "stats": {
+            "total_files": 773,
+            "php_files": 659,
+            "js_files": 46,
+            "css_files": 68,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 47,
+            "code_quality_issues": 27,
+            "deprecated_functions": 0,
+            "sql_injections": 9,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 30,
+        "scan_duration": "3,693.54"
+    },
+    {
+        "timestamp": "2025-10-27 16:33:17",
+        "stats": {
+            "total_files": 774,
+            "php_files": 660,
+            "js_files": 46,
+            "css_files": 68,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 47,
+            "code_quality_issues": 27,
+            "deprecated_functions": 0,
+            "sql_injections": 9,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 30,
+        "scan_duration": "3,801.74"
+    },
+    {
+        "timestamp": "2025-10-27 17:37:12",
+        "stats": {
+            "total_files": 774,
+            "php_files": 660,
+            "js_files": 46,
+            "css_files": 68,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 47,
+            "code_quality_issues": 27,
+            "deprecated_functions": 0,
+            "sql_injections": 9,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 30,
+        "scan_duration": "3,760.95"
+    },
+    {
+        "timestamp": "2025-11-02 04:23:10",
+        "stats": {
+            "total_files": 782,
+            "php_files": 666,
+            "js_files": 46,
+            "css_files": 70,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 54,
+            "code_quality_issues": 34,
+            "deprecated_functions": 2,
+            "sql_injections": 10,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 35,
+        "scan_duration": "4,408.72"
+    },
+    {
+        "timestamp": "2025-11-03 11:27:06",
+        "stats": {
+            "total_files": 788,
+            "php_files": 672,
+            "js_files": 46,
+            "css_files": 70,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 55,
+            "code_quality_issues": 40,
+            "deprecated_functions": 1,
+            "sql_injections": 11,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 38,
+        "scan_duration": "5,404.12"
+    },
+    {
+        "timestamp": "2025-11-03 11:27:45",
+        "stats": {
+            "total_files": 788,
+            "php_files": 672,
+            "js_files": 46,
+            "css_files": 70,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 55,
+            "code_quality_issues": 40,
+            "deprecated_functions": 1,
+            "sql_injections": 11,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 38,
+        "scan_duration": "5,026.25"
+    },
+    {
+        "timestamp": "2025-11-04 07:51:28",
+        "stats": {
+            "total_files": 789,
+            "php_files": 673,
+            "js_files": 46,
+            "css_files": 70,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 55,
+            "code_quality_issues": 40,
+            "deprecated_functions": 1,
+            "sql_injections": 11,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 38,
+        "scan_duration": "5,524.86"
+    },
+    {
+        "timestamp": "2025-11-04 07:53:20",
+        "stats": {
+            "total_files": 789,
+            "php_files": 673,
+            "js_files": 46,
+            "css_files": 70,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 55,
+            "code_quality_issues": 40,
+            "deprecated_functions": 1,
+            "sql_injections": 11,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 38,
+        "scan_duration": "4,862.01"
+    },
+    {
+        "timestamp": "2025-11-04 08:32:53",
+        "stats": {
+            "total_files": 789,
+            "php_files": 673,
+            "js_files": 46,
+            "css_files": 70,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 55,
+            "code_quality_issues": 40,
+            "deprecated_functions": 1,
+            "sql_injections": 11,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 38,
+        "scan_duration": "5,068.38"
+    },
+    {
+        "timestamp": "2025-11-04 08:54:20",
+        "stats": {
+            "total_files": 789,
+            "php_files": 673,
+            "js_files": 46,
+            "css_files": 70,
+            "syntax_errors": 0,
+            "warnings": 0,
+            "permission_issues": 0,
+            "security_issues": 55,
+            "code_quality_issues": 40,
+            "deprecated_functions": 1,
+            "sql_injections": 11,
+            "xss_vulnerabilities": 0
+        },
+        "errors_count": 38,
+        "scan_duration": "5,103.31"
+    }
+]

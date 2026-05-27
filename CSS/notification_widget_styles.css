@@ -1,0 +1,504 @@
+/**
+ * CYCLOAN Admin Dashboard Notification Widget Styles
+ * Add these styles to your admin dashboard CSS
+ * 
+ * Usage: Include this in your dashboard.css or admin_styles.css
+ */
+
+/* ============================================================================
+   Notification Widget - Header Integration
+   ============================================================================ */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.notification-widget {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.notification-icon-link {
+  position: relative;
+  color: var(--primary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.notification-icon-link:hover {
+  color: var(--secondary);
+  background: rgba(27, 94, 32, 0.1);
+  transform: scale(1.1);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--pending);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: notificationPulse 2s infinite;
+}
+
+@keyframes notificationPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 83, 80, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 83, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 83, 80, 0);
+  }
+}
+
+/* ============================================================================
+   Notification Dropdown Menu
+   ============================================================================ */
+
+.notification-dropdown {
+  display: none;
+  position: absolute;
+  right: -50px;
+  top: 50px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 340px;
+  max-height: 450px;
+  overflow: hidden;
+  z-index: 1001;
+  animation: dropdownSlideIn 0.3s ease;
+}
+
+.notification-dropdown.show {
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-dropdown-header {
+  padding: 15px 20px;
+  border-bottom: 2px solid var(--light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.notification-dropdown-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--darker);
+}
+
+.view-all {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.view-all:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+.notification-dropdown-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 380px;
+}
+
+.notification-dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notification-dropdown-list::-webkit-scrollbar-track {
+  background: var(--light);
+}
+
+.notification-dropdown-list::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.notification-dropdown-list::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* ============================================================================
+   Notification Items in Dropdown
+   ============================================================================ */
+
+.notification-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--light);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background: rgba(27, 94, 32, 0.05);
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+  font-size: 1rem;
+  color: white;
+}
+
+.notification-icon.color-success {
+  background: rgba(46, 125, 50, 0.2);
+  color: #2e7d32;
+}
+
+.notification-icon.color-info {
+  background: rgba(27, 94, 32, 0.2);
+  color: #1b5e20;
+}
+
+.notification-icon.color-warning {
+  background: rgba(251, 192, 45, 0.2);
+  color: #f9a825;
+}
+
+.notification-icon.color-error {
+  background: rgba(211, 47, 47, 0.2);
+  color: #d32f2f;
+}
+
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--darker);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.notification-time {
+  margin: 4px 0 0 0;
+  font-size: 0.8rem;
+  color: var(--textbased);
+  opacity: 0.6;
+}
+
+.empty-notification {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--textbased);
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+.empty-notification i {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  opacity: 0.3;
+}
+
+/* ============================================================================
+   Notification Status Indicators
+   ============================================================================ */
+
+.notification-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pending);
+}
+
+.status-dot.read {
+  background: var(--bg);
+}
+
+/* ============================================================================
+   Notification Count Badge on Table Rows
+   ============================================================================ */
+
+.row-notification-badge {
+  display: inline-block;
+  background: var(--pending);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-left: 6px;
+}
+
+/* ============================================================================
+   Notification Toast Messages
+   ============================================================================ */
+
+.notification-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  border-left: 4px solid var(--primary);
+  padding: 15px 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 3000;
+  animation: toastSlideIn 0.3s ease;
+}
+
+.notification-toast.success {
+  border-left-color: #2e7d32;
+}
+
+.notification-toast.success .toast-icon {
+  color: #2e7d32;
+}
+
+.notification-toast.error {
+  border-left-color: #d32f2f;
+}
+
+.notification-toast.error .toast-icon {
+  color: #d32f2f;
+}
+
+.notification-toast.warning {
+  border-left-color: #f9a825;
+}
+
+.notification-toast.warning .toast-icon {
+  color: #f9a825;
+}
+
+.notification-toast.info {
+  border-left-color: var(--primary);
+}
+
+.notification-toast.info .toast-icon {
+  color: var(--primary);
+}
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
+.notification-toast.closing {
+  animation: toastSlideOut 0.3s ease forwards;
+}
+
+/* ============================================================================
+   Responsive Design
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .notification-dropdown {
+    right: -20px;
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .notification-dropdown {
+    position: fixed;
+    right: 10px;
+    left: 10px;
+    bottom: auto;
+    top: 70px;
+    min-width: auto;
+    max-height: calc(100vh - 100px);
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .notification-icon-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .notification-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .notification-dropdown {
+    right: 0;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .notification-item {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .notification-title {
+    font-size: 0.85rem;
+  }
+
+  .notification-time {
+    font-size: 0.75rem;
+  }
+
+  .notification-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .notification-toast {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+/* ============================================================================
+   Accessibility
+   ============================================================================ */
+
+.notification-widget:focus-visible,
+.notification-icon-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.notification-item:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+/* ============================================================================
+   Dark Mode Support (if applicable)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  .notification-dropdown {
+    background: #1e293b;
+  }
+
+  .notification-dropdown-header {
+    border-bottom-color: #334155;
+  }
+
+  .notification-dropdown-header h3 {
+    color: #f1f5f9;
+  }
+
+  .notification-item {
+    border-bottom-color: #334155;
+  }
+
+  .notification-item:hover {
+    background: rgba(27, 94, 32, 0.1);
+  }
+
+  .notification-title {
+    color: #f1f5f9;
+  }
+
+  .notification-time {
+    color: #cbd5e1;
+  }
+
+  .empty-notification {
+    color: #cbd5e1;
+  }
+
+  .notification-toast {
+    background: #1e293b;
+    border-left-color: var(--primary);
+    color: #f1f5f9;
+  }
+}
+
+/* ============================================================================
+   Print Styles
+   ============================================================================ */
+
+@media print {
+  .notification-widget,
+  .notification-dropdown {
+    display: none !important;
+  }
+}
