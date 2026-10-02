@@ -2026,7 +2026,7 @@ try {
         GROUP BY lt.type_name
     ");
 } catch (Exception $e) {
-    error_log('Loan Type Graph data fetch failed: ' . $e->getMessage(), 3, 'errors.log');
+    error_log('Loan Type Graph data fetch failed: ' . $e->getMessage());
     $loanTypeData = [];
 }
 
@@ -2046,7 +2046,7 @@ try {
         ORDER BY ps.due_date ASC
     ");
 } catch (Exception $e) {
-    error_log('Due Accounts List data fetch failed: ' . $e->getMessage(), 3, 'errors.log');
+    error_log('Due Accounts List data fetch failed: ' . $e->getMessage());
     $dueAccountsData = [];
 }
 
@@ -2111,7 +2111,7 @@ try {
         LIMIT 50
     ");
 } catch (Exception $e) {
-    error_log('Activity Logs data fetch failed: ' . $e->getMessage(), 3, 'errors.log');
+    error_log('Activity Logs data fetch failed: ' . $e->getMessage());
     $activityLogs = [];
 }
 

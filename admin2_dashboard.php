@@ -3989,7 +3989,7 @@ $loanTypeData = executeQuery($conn, "
     GROUP BY lt.type_name
 ");
 if (empty($loanTypeData)) {
-    error_log('Loan Type Graph data fetch failed', 3, 'errors.log');
+    error_log('Loan Type Graph data fetch failed');
     $loanTypeData = [
         ['type_name' => 'Individual', 'count' => 0],
         ['type_name' => 'Cooperative', 'count' => 0]
@@ -4012,7 +4012,7 @@ try {
         ORDER BY ps.due_date ASC
     ");
     if (empty($dueAccountsData)) {
-        error_log('Due Accounts List data fetch: No records found', 3, 'errors.log');
+        error_log('Due Accounts List data fetch: No records found');
     }
 } catch (Exception $e) {
     error_log('Data fetch operation failed', E_USER_WARNING);
@@ -4035,7 +4035,7 @@ $activityLogs = executeQuery($conn, "
     LIMIT 50
 ");
 if (empty($activityLogs)) {
-    error_log('Activity Logs data fetch failed', 3, 'errors.log');
+    error_log('Activity Logs data fetch failed');
 } else {
     // Apply module mapping to initial logs
     foreach ($activityLogs as &$log) {
