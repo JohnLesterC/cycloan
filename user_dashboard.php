@@ -32,7 +32,7 @@ function debugLog($message, $userId = null)
     $timestamp = date('Y-m-d H:i:s');
     $userContext = $userId ? "User ID: $userId | " : "";
     $logMessage = "[$timestamp] $userContext$message\n";
-    error_log($logMessage, 3, 'debug.log');
+    error_log($logMessage);
 }
 
 // Check if the user is logged in
@@ -182,7 +182,7 @@ debugLog("Fetched " . count($loanApplications) . " loan applications", $userId);
 
 // Check for active or pending loan applications
 $stmt = $conn->prepare("
-    SELECT COUNT(*) as count, application_id
+    SELECT COUNT(*) as count, MAX(application_id) as application_id
     FROM loan_applications
     WHERE user_id = ? AND status IN ('Active', 'Pending')
 ");
@@ -1181,7 +1181,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_active_loan') {
             margin: 0;
         }
     </style>
-    <link rel="stylesheet" href="CSS/cycloan-modern.css">
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 
 </head>
 

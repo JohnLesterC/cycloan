@@ -221,8 +221,10 @@ if (empty($role) || empty($id)) {
     die('Unauthorized access');
 }
 
-// Fetch user profile image
-$sql = "SELECT profile_img FROM $role WHERE id = ?";
+// Fetch user profile image (map role to correct table name)
+$roleTableMap = ['superadmin' => 'superadmins', 'admin1' => 'admin1', 'admin2' => 'admin2', 'user' => 'users1'];
+$dbTable = $roleTableMap[$role] ?? $role;
+$sql = "SELECT profile_img FROM $dbTable WHERE id = ?";
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
     logError('ERROR', 'Failed to prepare profile image query', ['error' => $conn->error]);
@@ -2718,7 +2720,7 @@ function sendEmail($to, $toName, $subject, $body, $context = '')
 if (isset($_GET['action']) && $_GET['action'] === 'get_due_accounts') {
     try {
         $dueAccounts = executeQuery($conn, "
-            SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.payment_id, la.loan_id, la.application_id
+            SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.id AS payment_id, la.loan_id, la.application_id
             FROM payment_schedules ps
             JOIN loans l ON ps.loan_id = l.loan_id
             JOIN loan_applications la ON l.application_id = la.application_id
@@ -3997,7 +3999,7 @@ if (empty($loanTypeData)) {
 // Fetch data for Due Accounts List
 try {
     $dueAccountsData = executeQuery($conn, "
-        SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.payment_id, la.loan_id, la.application_id
+        SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.id AS payment_id, la.loan_id, la.application_id
         FROM payment_schedules ps
         JOIN loans l ON ps.loan_id = l.loan_id
         JOIN loan_applications la ON l.application_id = la.application_id
@@ -4134,13 +4136,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_payment_details' && isset
 
         // Fetch payment details
         $payment = executeQuery($conn, "
-            SELECT ps.payment_id, ps.due_date, ps.amount, ps.status, ps.loan_id, 
+            SELECT ps.id AS payment_id, ps.due_date, ps.amount, ps.status, ps.loan_id, 
                    la.loan_id as full_loan_id, la.application_id, u.first_name, u.last_name
             FROM payment_schedules ps
             JOIN loans l ON ps.loan_id = l.loan_id
             JOIN loan_applications la ON l.application_id = la.application_id
             JOIN users1 u ON la.user_id = u.id
-            WHERE ps.payment_id = ?
+            WHERE ps.id = ?
         ", "i", [$paymentId]);
 
         if (empty($payment)) {
@@ -5141,7 +5143,7 @@ if (!$ACTION_HANDLED && isset($_POST['action']) && $_POST['action'] === 'send_pa
             JOIN loans l ON ps.loan_id = l.loan_id
             JOIN loan_applications la ON l.application_id = la.application_id
             JOIN users1 u ON la.user_id = u.id
-            WHERE ps.payment_id = ?
+            WHERE ps.id = ?
         ", "i", [$paymentId]);
 
         if (empty($payment)) {
@@ -5544,7 +5546,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'export_applications') {
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <!-- SheetJS library for Excel export with styling -->
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-    <link rel="stylesheet" href="CSS/cycloan-modern.css">
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 
 <style>

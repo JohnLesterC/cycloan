@@ -82,7 +82,7 @@ if ($result) {
 // Fetch data for Due Accounts - Payments due within next 30 days
 try {
     $stmt = $conn->prepare("
-        SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.payment_id, l.loan_id, la.application_id
+        SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.id AS payment_id, l.loan_id, la.application_id
         FROM payment_schedules ps
         JOIN loans l ON ps.loan_id = l.loan_id
         JOIN loan_applications la ON l.application_id = la.application_id
@@ -976,7 +976,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
             JOIN loans l ON ps.loan_id = l.loan_id
             JOIN loan_applications la ON l.application_id = la.application_id
             JOIN users1 u ON la.user_id = u.id
-            WHERE ps.payment_id = ?
+            WHERE ps.id = ?
         ");
         mysqli_stmt_bind_param($stmt, "i", $paymentId);
         mysqli_stmt_execute($stmt);
@@ -1251,7 +1251,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
             }
         }
     </style>
-    <link rel="stylesheet" href="CSS/cycloan-modern.css">
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 <style>
     .dropdown-container {

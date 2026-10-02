@@ -2033,7 +2033,7 @@ try {
 // Data for Due Accounts List
 try {
     $dueAccountsData = executeQuery($conn, "
-        SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.payment_id, l.loan_id, la.application_id
+        SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.id AS payment_id, l.loan_id, la.application_id
         FROM payment_schedules ps
         JOIN loans l ON ps.loan_id = l.loan_id
         JOIN loan_applications la ON l.application_id = la.application_id
@@ -2054,7 +2054,7 @@ try {
 if (isset($_GET['action']) && $_GET['action'] === 'get_due_accounts') {
     try {
         $stmt = $conn->prepare("
-            SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.payment_id, l.loan_id, la.application_id
+            SELECT ps.due_date, u.first_name, u.last_name, ps.amount, ps.id AS payment_id, l.loan_id, la.application_id
             FROM payment_schedules ps
             JOIN loans l ON ps.loan_id = l.loan_id
             JOIN loan_applications la ON l.application_id = la.application_id
@@ -3075,7 +3075,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
             JOIN loans l ON ps.loan_id = l.loan_id
             JOIN loan_applications la ON l.application_id = la.application_id
             JOIN users1 u ON la.user_id = u.id
-            WHERE ps.payment_id = ?
+            WHERE ps.id = ?
         ");
         $stmt->bind_param("i", $paymentId);
         $stmt->execute();
@@ -3153,7 +3153,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-    <link rel="stylesheet" href="CSS/cycloan-modern.css">
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 <style>
     /* ===== CSS Variables ===== */

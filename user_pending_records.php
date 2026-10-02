@@ -493,7 +493,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <link rel="stylesheet" href="CSS/cycloan-modern.css">
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 
 <body>

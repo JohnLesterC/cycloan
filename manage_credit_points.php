@@ -575,7 +575,7 @@ $profile_link = $adminRole === 'superadmin' ? 'profileSuperadmin.php' : ($adminR
             font-size: 16px;
         }
     </style>
-    <link rel="stylesheet" href="CSS/cycloan-modern.css">
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 
 <body>
