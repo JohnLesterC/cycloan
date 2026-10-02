@@ -1,0 +1,50 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: cycloan_root_pass
+      MYSQL_DATABASE: cycloan_db
+      MYSQL_USER: cycloan
+      MYSQL_PASSWORD: cycloan_pass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.base44
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:80"
+    volumes:
+      - ./:/var/www/html
+    command: sh -c "chmod -R a+rX /var/www/html && exec apache2-foreground"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=cycloan_db
+      - DB_USER=cycloan
+      - DB_PASS=cycloan_pass
+      - DB_PORT=3306
+      - APP_ENV=development
+      - APP_DEBUG=true
+      - BASE44_PUBLIC_HOST_SUFFIX=${BASE44_PUBLIC_HOST_SUFFIX:-localhost}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  db_data:

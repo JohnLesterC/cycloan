@@ -3,10 +3,10 @@
 // Set PHP timezone to Philippine Time (PHT) - UTC+8
 date_default_timezone_set('Asia/Manila');
 
-$host = 'localhost';
-$database = 'cycloan_db';
-$username = 'root';
-$password = '';
+$host = getenv('DB_HOST') ?: 'localhost';
+$database = getenv('DB_NAME') ?: 'cycloan_db';
+$username = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASS') ?: '';
 
 try {
     $conn = new mysqli($host, $username, $password, $database);
