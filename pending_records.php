@@ -199,6 +199,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_loan_details' && isset($_
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="CSS/cycloan-modern.css">
 </head>
 
 <style>

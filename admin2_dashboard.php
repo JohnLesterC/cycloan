@@ -5544,6 +5544,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'export_applications') {
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <!-- SheetJS library for Excel export with styling -->
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="CSS/cycloan-modern.css">
 </head>
 
 <style>

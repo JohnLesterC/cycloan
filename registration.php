@@ -631,6 +631,7 @@ $csrf_token = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
             font-style: italic;
         }
     </style>
+    <link rel="stylesheet" href="./CSS/cycloan-modern.css">
 </head>
 
 <body>

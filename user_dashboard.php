@@ -1181,6 +1181,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_active_loan') {
             margin: 0;
         }
     </style>
+    <link rel="stylesheet" href="CSS/cycloan-modern.css">
 
 </head>
 

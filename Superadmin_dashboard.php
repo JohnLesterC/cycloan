@@ -1251,6 +1251,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
             }
         }
     </style>
+    <link rel="stylesheet" href="CSS/cycloan-modern.css">
 </head>
 <style>
     .dropdown-container {

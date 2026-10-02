@@ -3153,6 +3153,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="CSS/cycloan-modern.css">
 </head>
 <style>
     /* ===== CSS Variables ===== */

@@ -228,6 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="stylesheet" href="CSS/style.css" />
   <link rel="stylesheet" href="CSS/login.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="CSS/cycloan-modern.css" />
 </head>
 
 <style>

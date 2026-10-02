@@ -2273,6 +2273,7 @@ if (isset($_POST['generate_monthly_collection'])) {
             margin: 10px;
         }
     </style>
+    <link rel="stylesheet" href="CSS/cycloan-modern.css">
 </head>
 
 <body>
