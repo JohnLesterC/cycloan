@@ -144,7 +144,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_current_interest_rate') {
                             </a>
                         </li>
                         <li>
-                            <a class="logout" href="index.php">
+                            <a class="logout" href="logout.php">
                                 <i class="fa-solid fa-sign-out"></i>
                                 Logout
                             </a>

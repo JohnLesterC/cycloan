@@ -156,7 +156,7 @@ function sendWelcomeEmail($to, $name)
             </html>
         ';
 
-        $mail->AltBody = "Hello $name,\n\nCongratulations! Your CYCLOAN account has been successfully verified.\n\nYou can now log in at http://localhost/CYCLOAN/index.php to:\n- Apply for loans\n- Track your applications\n- Manage payments\n- Access 24/7 support\n\nIf you have any questions, contact us at support@cycloan-cldd.com\n\nBest regards,\nThe CYCLOAN Team";
+        $mail->AltBody = "Hello $name,\n\nCongratulations! Your CYCLOAN account has been successfully verified.\n\nYou can now log in at index.php to:\n- Apply for loans\n- Track your applications\n- Manage payments\n- Access 24/7 support\n\nIf you have any questions, contact us at support@cycloan-cldd.com\n\nBest regards,\nThe CYCLOAN Team";
 
         $mail->send();
         return true;

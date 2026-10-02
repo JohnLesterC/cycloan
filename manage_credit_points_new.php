@@ -455,7 +455,7 @@ $profile_link = $adminRole === 'superadmin' ? 'profileSuperadmin.php' : ($adminR
                             </a>
                         </li>
                         <li>
-                            <a class="logout" href="index.php">
+                            <a class="logout" href="logout.php">
                                 <i class="fa-solid fa-sign-out"></i> Logout
                             </a>
                         </li>

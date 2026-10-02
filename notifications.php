@@ -24,13 +24,49 @@ if (!isset($conn) || !($conn instanceof mysqli)) {
     die("Database connection not available");
 }
 
-// Get user information including profile image
+// Determine role and corresponding table
+$role = $_SESSION['role'] ?? 'user';
+$roleTableMap = [
+    'user'       => ['table' => 'users1',      'img_col' => 'profile_image'],
+    'admin1'     => ['table' => 'admin1',      'img_col' => 'profile_img'],
+    'admin2'     => ['table' => 'admin2',      'img_col' => 'profile_img'],
+    'superadmin' => ['table' => 'superadmins',  'img_col' => 'profile_img'],
+];
+$roleInfo = $roleTableMap[$role] ?? $roleTableMap['user'];
+
+require_once 'NotificationManager.php';
+$notificationManager = new NotificationManager($conn);
+
+// Handle AJAX/real-time notification requests BEFORE user info query (works for all roles)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+    header('Content-Type: application/json');
+    $action = $_GET['action'];
+    $requestUserId = isset($_GET['user_id']) ? (int) $_GET['user_id'] : $userId;
+    try {
+        if ($action === 'get_unread_count') {
+            $counts = $notificationManager->getUnreadCounts($requestUserId);
+            echo json_encode(['success' => true, 'unread_count' => $counts['total'] ?? 0]);
+            exit;
+        } elseif ($action === 'get_recent_notifications') {
+            $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
+            $result = $notificationManager->getUserNotifications($requestUserId, [], 1, $limit);
+            echo json_encode(['success' => true, 'notifications' => $result['notifications'] ?? []]);
+            exit;
+        }
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+        exit;
+    }
+}
+
+// Get user information from the correct table based on role
 try {
-    $stmt = $conn->prepare("SELECT id as user_id, first_name, last_name, profile_image FROM users1 WHERE email = ?");
+    $tbl = $roleInfo['table'];
+    $imgCol = $roleInfo['img_col'];
+    $stmt = $conn->prepare("SELECT id as user_id, first_name, last_name, {$imgCol} as profile_image FROM {$tbl} WHERE email = ?");
     if (!$stmt) {
         throw new Exception("Database prepare failed: " . $conn->error);
     }
-
     $stmt->bind_param("s", $userEmail);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -45,7 +81,6 @@ try {
     $userName = trim($user['first_name'] . ' ' . $user['last_name']);
     $profile_image = !empty($user['profile_image']) ? $user['profile_image'] : 'IMAGE/default-avatar.png';
     $stmt->close();
-
 } catch (Exception $e) {
     die("Failed to fetch user information: " . $e->getMessage());
 }
@@ -57,84 +92,46 @@ $successMessage = '';
 $errorMessage = '';
 $current_page = basename($_SERVER['PHP_SELF']);
 
-try {
-    require_once 'NotificationManager.php';
-    $notificationManager = new NotificationManager($conn);
+$currentPage = max(1, (int) ($_GET['page'] ?? 1));
+$perPage = isset($_GET['per_page']) ? max(5, min(50, (int) $_GET['per_page'])) : 10;
 
-    // Handle GET requests for AJAX/real-time notifications
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
-        header('Content-Type: application/json');
-        $action = $_GET['action'];
-        $requestUserId = isset($_GET['user_id']) ? (int) $_GET['user_id'] : $userId;
-
-        try {
-            if ($action === 'get_unread_count') {
-                $counts = $notificationManager->getUnreadCounts($requestUserId);
-                echo json_encode([
-                    'success' => true,
-                    'unread_count' => $counts['total'] ?? 0
-                ]);
-                exit;
-            } elseif ($action === 'get_recent_notifications') {
-                $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
-                $result = $notificationManager->getUserNotifications($requestUserId, [], 1, $limit);
-                echo json_encode([
-                    'success' => true,
-                    'notifications' => $result['notifications'] ?? []
-                ]);
-                exit;
+// Handle POST actions
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? '';
+    if ($action === 'mark_read') {
+        $notificationIds = $_POST['notification_ids'] ?? [];
+        if (!empty($notificationIds)) {
+            foreach ($notificationIds as $notifId) {
+                $notificationManager->markAsRead($userId, intval($notifId));
             }
-        } catch (Exception $e) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Error: ' . $e->getMessage()
-            ]);
-            exit;
-        }
-    }
-
-    $currentPage = max(1, (int) ($_GET['page'] ?? 1));
-    $perPage = isset($_GET['per_page']) ? max(5, min(50, (int) $_GET['per_page'])) : 10;
-
-    // Handle POST actions
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $action = $_POST['action'] ?? '';
-
-        if ($action === 'mark_read') {
-            $notificationIds = $_POST['notification_ids'] ?? [];
-            if (!empty($notificationIds)) {
-                foreach ($notificationIds as $notifId) {
-                    $notificationManager->markAsRead($userId, intval($notifId));
-                }
-                $successMessage = "Notification marked as read.";
-                header("Location: " . $_SERVER['REQUEST_URI']);
-                exit();
-            }
-        } elseif ($action === 'mark_all_read') {
-            $notificationManager->markAllAsRead($userId);
-            $successMessage = "All notifications marked as read.";
+            $successMessage = "Notification marked as read.";
             header("Location: " . $_SERVER['REQUEST_URI']);
             exit();
-        } elseif ($action === 'delete') {
-            $notificationIds = $_POST['notification_ids'] ?? [];
-            if (!empty($notificationIds)) {
-                foreach ($notificationIds as $notifId) {
-                    $notificationManager->deleteNotifications($userId, intval($notifId));
-                }
-                $successMessage = "Notification deleted.";
-                header("Location: " . $_SERVER['REQUEST_URI']);
-                exit();
+        }
+    } elseif ($action === 'mark_all_read') {
+        $notificationManager->markAllAsRead($userId);
+        $successMessage = "All notifications marked as read.";
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
+    } elseif ($action === 'delete') {
+        $notificationIds = $_POST['notification_ids'] ?? [];
+        if (!empty($notificationIds)) {
+            foreach ($notificationIds as $notifId) {
+                $notificationManager->deleteNotifications($userId, intval($notifId));
             }
+            $successMessage = "Notification deleted.";
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
         }
     }
+}
 
+try {
     $notificationsResult = $notificationManager->getUserNotifications($userId, [], $currentPage, $perPage);
     $notifications = $notificationsResult['notifications'] ?? [];
     $totalCount = $notificationsResult['total_count'] ?? 0;
-
     $unreadCountsResult = $notificationManager->getUnreadCounts($userId);
     $totalUnread = $unreadCountsResult['total'] ?? 0;
-
 } catch (Exception $e) {
     $errorMessage = "Error: " . $e->getMessage();
 }
@@ -930,12 +927,21 @@ try {
                 <div class="dropdown-menu" id="dropdown">
                     <ul>
                         <li>
-                            <a href="profile.php" class="<?= $current_page === 'profile.php' ? 'active' : '' ?>">
+                            <?php
+                                $profilePages = [
+                                    'user'       => 'profile.php',
+                                    'admin1'     => 'profileAdmin1.php',
+                                    'admin2'     => 'profileAdmin2.php',
+                                    'superadmin' => 'profileSuperadmin.php',
+                                ];
+                                $profilePage = $profilePages[$role] ?? 'profile.php';
+                            ?>
+                            <a href="<?= $profilePage ?>" class="<?= $current_page === $profilePage ? 'active' : '' ?>">
                                 <img src="<?= htmlspecialchars($profile_image) ?>" alt="Profile Image"
                                     class="profile-icon"> Profile
                             </a>
                         </li>
-                        <li><a class="logout" href="index.php"><i class="fa-solid fa-sign-out"></i> Logout</a></li>
+                        <li><a class="logout" href="logout.php"><i class="fa-solid fa-sign-out"></i> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -951,28 +957,53 @@ try {
         </button>
         <nav>
             <img src="IMAGE/Main-Logo.png" alt="CYCLOAN Logo" class="sidebar-logo">
-            <a href="user_dashboard.php" class="<?= $current_page === 'user_dashboard.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-table-columns"></i> DASHBOARD
-            </a>
-            <a href="user_active_record.php" class="<?= $current_page === 'user_active_record.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-user-check"></i> ACTIVE RECORDS
-            </a>
-            <a href="user_pending_records.php"
-                class="<?= $current_page === 'user_pending_records.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-spinner"></i> PENDING RECORDS
-            </a>
-            <a href="user_closed_records.php"
-                class="<?= $current_page === 'user_closed_records.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-circle-check"></i> CLOSED RECORDS
-            </a>
-            <a href="user_history_activity.php"
-                class="<?= $current_page === 'user_history_activity.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-clipboard"></i> HISTORY ACTIVITY
-            </a>
-            <a href="#" onclick="openCalculatorModal(); return false;"
-                class="<?= $current_page === 'loan_calculator' ? 'active' : '' ?>">
-                <i class="fa-solid fa-calculator"></i> LOAN CALCULATOR
-            </a>
+            <?php if ($role === 'user'): ?>
+                <a href="user_dashboard.php" class="<?= $current_page === 'user_dashboard.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-table-columns"></i> DASHBOARD
+                </a>
+                <a href="user_active_record.php" class="<?= $current_page === 'user_active_record.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-user-check"></i> ACTIVE RECORDS
+                </a>
+                <a href="user_pending_records.php" class="<?= $current_page === 'user_pending_records.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-spinner"></i> PENDING RECORDS
+                </a>
+                <a href="user_closed_records.php" class="<?= $current_page === 'user_closed_records.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-circle-check"></i> CLOSED RECORDS
+                </a>
+                <a href="user_history_activity.php" class="<?= $current_page === 'user_history_activity.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-clipboard"></i> HISTORY ACTIVITY
+                </a>
+                <a href="#" onclick="openCalculatorModal(); return false;" class="<?= $current_page === 'loan_calculator' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-calculator"></i> LOAN CALCULATOR
+                </a>
+            <?php else: ?>
+                <?php
+                    $dashboards = [
+                        'admin1'     => 'admin1_dashboard.php',
+                        'admin2'     => 'admin2_dashboard.php',
+                        'superadmin' => 'Superadmin_dashboard.php',
+                    ];
+                    $dashLink = $dashboards[$role] ?? 'index.php';
+                ?>
+                <a href="<?= $dashLink ?>" class="<?= $current_page === basename($dashLink) ? 'active' : '' ?>">
+                    <i class="fa-solid fa-table-columns"></i> DASHBOARD
+                </a>
+                <a href="applicant.php" class="<?= $current_page === 'applicant.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-file-lines"></i> APPLICATIONS
+                </a>
+                <a href="active_records.php" class="<?= $current_page === 'active_records.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-folder-open"></i> ACTIVE RECORDS
+                </a>
+                <a href="pending_records.php" class="<?= $current_page === 'pending_records.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-spinner"></i> PENDING RECORDS
+                </a>
+                <a href="closed_records.php" class="<?= $current_page === 'closed_records.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-circle-check"></i> CLOSED RECORDS
+                </a>
+                <a href="history_activity.php" class="<?= $current_page === 'history_activity.php' ? 'active' : '' ?>">
+                    <i class="fa-solid fa-clipboard"></i> HISTORY ACTIVITY
+                </a>
+            <?php endif; ?>
         </nav>
     </div>
 

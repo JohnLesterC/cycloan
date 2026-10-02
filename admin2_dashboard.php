@@ -7426,14 +7426,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'export_applications') {
         <div class="profileXdate">
             <div id="datetime" class="datetime"></div>
             <div class="notification-wrapper">
-                <a href="notifications_enhanced.php" class="notification-bell" title="View Notifications">
+                <a href="notifications.php" class="notification-bell" title="View Notifications">
                     <i class="fa-solid fa-bell"></i>
                     <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
                 </a>
                 <div class="notification-dropdown" id="notificationDropdown" style="display: none;">
                     <div class="notification-dropdown-header">
                         <h3>Recent Notifications</h3>
-                        <a href="notifications_enhanced.php" class="view-all-link">View All</a>
+                        <a href="notifications.php" class="view-all-link">View All</a>
                     </div>
                     <div class="notification-list" id="notificationList">
                         <div class="notification-loading">
@@ -7456,7 +7456,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'export_applications') {
                             </a>
                         </li>
                         <li>
-                            <a class="logout" href="index.php">
+                            <a class="logout" href="logout.php">
                                 <i class="fa-solid fa-sign-out"></i>
                                 Logout
                             </a>
@@ -12272,7 +12272,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'export_applications') {
         }
 
         function checkNotifications() {
-            fetch('notifications_enhanced.php?action=get_unread_count&user_id=' + adminId)
+            fetch('notifications.php?action=get_unread_count&user_id=' + adminId)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success && data.unread_count > 0) {
@@ -12295,7 +12295,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'export_applications') {
             const listElement = document.getElementById('notificationList');
             if (!listElement) return;
 
-            fetch('notifications_enhanced.php?action=get_recent_notifications&user_id=' + adminId + '&limit=5')
+            fetch('notifications.php?action=get_recent_notifications&user_id=' + adminId + '&limit=5')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success && data.notifications.length > 0) {

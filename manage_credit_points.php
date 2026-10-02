@@ -627,7 +627,7 @@ $profile_link = $adminRole === 'superadmin' ? 'profileSuperadmin.php' : ($adminR
     <div class="header">
         <div class="profileXdate">
             <div id="datetime" class="datetime"></div>
-            <a href="notifications_enhanced.php" class="notification-bell" title="View Notifications">
+            <a href="notifications.php" class="notification-bell" title="View Notifications">
                 <i class="fa-solid fa-bell"></i>
             </a>
             <div class="profile-container">
@@ -646,7 +646,7 @@ $profile_link = $adminRole === 'superadmin' ? 'profileSuperadmin.php' : ($adminR
                             </a>
                         </li>
                         <li>
-                            <a class="logout" href="index.php">
+                            <a class="logout" href="logout.php">
                                 <i class="fa-solid fa-sign-out"></i> Logout
                             </a>
                         </li>

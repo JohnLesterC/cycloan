@@ -174,7 +174,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                             </a>
                         </li>
                         <li>
-                            <a class="logout" href="index.php"><i class="fa-solid fa-sign-out"></i>
+                            <a class="logout" href="logout.php"><i class="fa-solid fa-sign-out"></i>
                                 Logout
                             </a>
                         </li>

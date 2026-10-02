@@ -140,7 +140,7 @@ function renderNotificationWidget($conn, $user_id, $user_role = 'user')
 
                 <!-- Footer -->
                 <div class="notification-dropdown-footer">
-                    <a href="notifications_enhanced.php" class="view-all-link" role="menuitem">
+                    <a href="notifications.php" class="view-all-link" role="menuitem">
                         <i class="fas fa-list"></i> View All Notifications
                     </a>
                 </div>

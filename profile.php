@@ -5,7 +5,7 @@ require "credit_points_manager.php";
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /CYCLOAN/index.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -70,7 +70,7 @@ $civil_status = $user_data['civil_status'];
 $res_barangay = $user_data['res_barangay'];
 $bus_barangay = $user_data['bus_barangay'];
 $reg_voter = $user_data['reg_voter'];
-$profile_image = $user_data['profile_image'] ?? 'http://localhost/CYCLOAN/IMAGE/2x2.png';
+$profile_image = $user_data['profile_image'] ?? 'IMAGE/2x2.png';
 
 // Check for pending or active loans
 $hasPendingActiveLoan = false;
@@ -128,7 +128,7 @@ try {
                             </a>
                         </li>
                         <li>
-                            <a class="logout" href="index.php"><i class="fa-solid fa-sign-out"></i> Logout</a>
+                            <a class="logout" href="logout.php"><i class="fa-solid fa-sign-out"></i> Logout</a>
                         </li>
                     </ul>
                 </div>

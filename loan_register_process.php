@@ -6,13 +6,13 @@ require_once 'email_sender.php';
 
 if (!$conn) {
     $_SESSION['error'] = 'Connection failed: ' . mysqli_connect_error();
-    header('Location: /user_dashboard.php');
+    header('Location: user_dashboard.php');
     exit;
 }
 
 if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] <= 0) {
     $_SESSION['error'] = 'You must be logged in to submit an application.';
-    header('Location: /user_dashboard.php');
+    header('Location: user_dashboard.php');
     exit;
 }
 
@@ -299,24 +299,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $_SESSION['success'] = "Loan application submitted successfully!";
-            header('Location: /user_dashboard.php');
+            header('Location: user_dashboard.php');
             exit;
         } catch (Exception $e) {
             mysqli_rollback($conn);
             error_log("Database error: " . $e->getMessage(), 3, 'debug.log');
             $_SESSION['error'] = 'Database error: ' . $e->getMessage();
-            header('Location: /user_dashboard.php');
+            header('Location: user_dashboard.php');
             exit;
         }
     } else {
         error_log("Validation errors: " . implode('; ', $errors), 3, 'debug.log');
         $_SESSION['error'] = implode('<br>', $errors);
-        header('Location: /user_dashboard.php');
+        header('Location: user_dashboard.php');
         exit;
     }
 } else {
     $_SESSION['error'] = 'Invalid request method.';
-    header('Location: /user_dashboard.php');
+    header('Location: user_dashboard.php');
     exit;
 }
 

@@ -295,7 +295,7 @@ function renderNotificationWidget($conn, $admin_id, $admin_role)
 
     $html = '
     <div class="notification-widget">
-        <a href="notifications_enhanced.php" class="notification-icon-link" title="View all notifications">
+        <a href="notifications.php" class="notification-icon-link" title="View all notifications">
             <i class="fas fa-bell"></i>
             ' . ($unreadCount > 0 ? '<span class="notification-badge">' . $unreadCount . '</span>' : '') . '
         </a>
@@ -303,7 +303,7 @@ function renderNotificationWidget($conn, $admin_id, $admin_role)
         <div class="notification-dropdown" id="notificationDropdown">
             <div class="notification-dropdown-header">
                 <h3>Notifications</h3>
-                <a href="notifications_enhanced.php" class="view-all">View All</a>
+                <a href="notifications.php" class="view-all">View All</a>
             </div>
             
             <div class="notification-dropdown-list">';

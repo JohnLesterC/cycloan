@@ -1881,7 +1881,7 @@ function sendCreditStatusEmail($conn, $applicationId, $newStatus, $finalLoanAmou
 
                     <!-- CTA Button -->
                     <div style='text-align: center; margin: 30px 0;'>
-                        <a href='login.php' style='display: inline-block; background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); color: #ffffff; text-decoration: none; padding: 15px 40px; border-radius: 25px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3); transition: all 0.3s ease;'>
+                        <a href='index.php' style='display: inline-block; background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); color: #ffffff; text-decoration: none; padding: 15px 40px; border-radius: 25px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3); transition: all 0.3s ease;'>
                             🔐 Login to Your Account
                         </a>
                     </div>
@@ -5096,14 +5096,14 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
         <div class="profileXdate">
             <div id="datetime" class="datetime"></div>
             <div class="notification-wrapper">
-                <a href="notifications_enhanced.php" class="notification-bell" title="View Notifications">
+                <a href="notifications.php" class="notification-bell" title="View Notifications">
                     <i class="fa-solid fa-bell"></i>
                     <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
                 </a>
                 <div class="notification-dropdown" id="notificationDropdown" style="display: none;">
                     <div class="notification-dropdown-header">
                         <h3>Recent Notifications</h3>
-                        <a href="notifications_enhanced.php" class="view-all-link">View All</a>
+                        <a href="notifications.php" class="view-all-link">View All</a>
                     </div>
                     <div class="notification-list" id="notificationList">
                         <div class="notification-loading">
@@ -5128,7 +5128,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
                             </a>
                         </li>
                         <li role="none">
-                            <a class="logout" href="index.php" role="menuitem" tabindex="-1">
+                            <a class="logout" href="logout.php" role="menuitem" tabindex="-1">
                                 <i class="fa-solid fa-sign-out"></i>
                                 Logout
                             </a>
@@ -7122,7 +7122,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
             }
 
             function checkNotifications() {
-                fetch('notifications_enhanced.php?action=get_unread_count&user_id=' + adminId)
+                fetch('notifications.php?action=get_unread_count&user_id=' + adminId)
                     .then(response => {
                         if (!response.ok) throw new Error(`HTTP ${response.status}`);
                         return response.text().then(text => {
@@ -7155,7 +7155,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'send_payment_reminder' && i
                 const listElement = document.getElementById('notificationList');
                 if (!listElement) return;
 
-                fetch('notifications_enhanced.php?action=get_recent_notifications&user_id=' + adminId + '&limit=5')
+                fetch('notifications.php?action=get_recent_notifications&user_id=' + adminId + '&limit=5')
                     .then(response => {
                         if (!response.ok) throw new Error(`HTTP ${response.status}`);
                         return response.text().then(text => {

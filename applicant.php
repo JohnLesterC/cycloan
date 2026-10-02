@@ -748,7 +748,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_loan_details' && isset($_
     <div class="header">
         <div class="profileXdate">
             <div id="datetime" class="datetime"></div>
-            <a href="notifications_enhanced.php" class="notification-bell" title="View Notifications">
+            <a href="notifications.php" class="notification-bell" title="View Notifications">
                 <i class="fa-solid fa-bell"></i>
                 <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
             </a>
@@ -769,7 +769,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_loan_details' && isset($_
                             </a>
                         </li>
                         <li role="none">
-                            <a class="logout" href="index.php" role="menuitem" tabindex="-1">
+                            <a class="logout" href="logout.php" role="menuitem" tabindex="-1">
                                 <i class="fa-solid fa-sign-out"></i>
                                 Logout
                             </a>
@@ -1628,7 +1628,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_loan_details' && isset($_
 
         function checkNotifications() {
             if (!adminId) return;
-            fetch('notifications_enhanced.php?action=get_unread_count&user_id=' + adminId)
+            fetch('notifications.php?action=get_unread_count&user_id=' + adminId)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success && data.unread_count > 0) {

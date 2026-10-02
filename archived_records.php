@@ -283,7 +283,7 @@ mysqli_close($conn);
     <div class="header">
         <div class="profileXdate">
             <div id="datetime" class="datetime"></div>
-            <a href="notifications_enhanced.php" class="notification-bell" title="View Notifications">
+            <a href="notifications.php" class="notification-bell" title="View Notifications">
                 <i class="fa-solid fa-bell"></i>
             </a>
             <div class="profile-container">
@@ -303,7 +303,7 @@ mysqli_close($conn);
                             </a>
                         </li>
                         <li role="none">
-                            <a class="logout" href="index.php" role="menuitem" tabindex="-1">
+                            <a class="logout" href="logout.php" role="menuitem" tabindex="-1">
                                 <i class="fa-solid fa-sign-out"></i>
                                 Logout
                             </a>

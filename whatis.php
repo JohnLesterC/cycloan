@@ -80,7 +80,7 @@ $stmt_loans->close();
             <a href="user_pending_records.php">PENDING RECORDS</a>
             <a href="user_closed_records.php">CLOSE RECORDS</a>
             <a href="user_history_activity.php">HISTORY ACTIVITY</a>
-            <a class="logout" href="index.php" style="float: right;">LOGOUT</a>
+            <a class="logout" href="logout.php" style="float: right;">LOGOUT</a>
         </nav>
     </div>
 

@@ -140,7 +140,7 @@ mysqli_close($conn);
                             </a>
                         </li>
                         <li>
-                            <a class="logout" href="index.php">
+                            <a class="logout" href="logout.php">
                                 <i class="fa-solid fa-sign-out"></i>
                                 Logout
                             </a>
