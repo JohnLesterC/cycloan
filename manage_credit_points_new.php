@@ -412,6 +412,7 @@ $profile_link = $adminRole === 'superadmin' ? 'profileSuperadmin.php' : ($adminR
             white-space: nowrap;
         }
     </style>
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 
 <body>

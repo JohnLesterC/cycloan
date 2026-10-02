@@ -96,6 +96,7 @@
             color: white;
         }
     </style>
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 
 <body>

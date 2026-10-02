@@ -453,6 +453,7 @@ function sendPaymentInvoiceEmail($email, $name, $amount_paid, $interest_paid, $p
         .email-body { padding: 30px 20px; color: #333333; line-height: 1.6; }
         .email-footer { background-color: #f8f8f8; padding: 20px; text-align: center; font-size: 12px; color: #666666; border-top: 1px solid #e0e0e0; }
     </style>
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 <body>
     <div class='email-container'>

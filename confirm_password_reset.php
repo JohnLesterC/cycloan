@@ -394,6 +394,7 @@ $message_type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
             }
         }
     </style>
+    <link rel="stylesheet" href="CSS/cycloan-system.css">
 </head>
 
 <body>

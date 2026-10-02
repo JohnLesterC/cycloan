@@ -85,6 +85,7 @@ function sendWelcomeEmail($to, $name)
                         .button { padding: 14px 28px !important; font-size: 15px !important; }
                     }
                 </style>
+            <link rel="stylesheet" href="CSS/cycloan-system.css">
             </head>
             <body>
                 <div class="container">
